@@ -15,9 +15,9 @@ updating of all tweens for any entity.
 
 ### The Basics ###
 
-Copy the `tween.js` file into your `lib/plugins/` directory and require
-`plugins.tween` in your game class. To add a tween to an entity and start it
-immediately, you would do something like the following:
+Copy the `tween` folder into your `lib/plugins/` directory and require
+`plugins.tween.tween` in your game class. To add a tween to an entity and start 
+it immediately, you would do something like the following:
 
 	myEntity.tween( {pos: {x: 30}}, 2.5 ).start();
 
