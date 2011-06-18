@@ -1,8 +1,8 @@
 ig.module(
-    'plugins.tween.tween'
+    'plugins.impact-tween.tween'
 )
 .requires(
-    'plugins.tween.entity'
+    'plugins.impact-tween.entity'
 )
 .defines(function() {
 

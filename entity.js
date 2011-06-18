@@ -1,5 +1,5 @@
 ig.module(
-    'plugins.tween.entity'
+    'plugins.impact-tween.entity'
 )
 .requires(
     'impact.entity'
