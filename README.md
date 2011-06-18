@@ -135,3 +135,11 @@ so experiment! Heres the list:
 - ig.Tween.Easing.Bounce.EaseOut
 - ig.Tween.Easing.Bounce.EaseInOut
 
+### Advanced Usage ###
+
+Create a tween on multiple objects and properties:
+
+    var myEntity1 = this.spawnEntity(MyEntity, 0, 0, {}),
+        myEntity2 = this.spawnEntity(MyEntity, 100, 20, {}),
+        tween = new ig.Tween([myEntity1, myEntity2], [{pos: {x: 100}}, {pos: {x: 0}}], 2.5);
+    tween.start();

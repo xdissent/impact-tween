@@ -19,10 +19,10 @@ if ( !Array.prototype.indexOf ) {
 }
 
 ig.Tween = ig.Class.extend({
-    _object: null,
-    valuesStart: {},
-    valuesEnd: {},
-    valuesDelta: {},
+    _objects: null,
+    valuesStart: [],
+    valuesEnd: [],
+    valuesDelta: [],
     _elapsed: 0,
     timer: false,
     started: false,
@@ -39,12 +39,39 @@ ig.Tween = ig.Class.extend({
     loopNum: -1,
     
     init: function(obj, properties, duration, settings) {
-        this._object = obj;
         this.easing = ig.Tween.Easing.Linear.EaseNone;
-        this._props = properties;
         this.duration = duration;
         ig.merge(this, settings);
         this.loopNum = this.loopCount;
+        
+        // Get target properties
+        if (typeof properties == 'object' 
+            && properties.constructor === (new Array).constructor
+        ){
+            // props is an array
+            this._props = properties;
+        } else {
+            // props is a single object
+            this._props = [properties];
+        }
+        
+        // Get target objects
+        if (typeof obj == 'object' 
+            && obj.constructor === (new Array).constructor
+        ){
+            // objs is an array
+            this._objects = obj;
+        } else {
+            // objs is a single object
+            this._objects = [obj];
+        }
+        
+        // Initialize values for each object
+        for (var i = 0; i < this._objects.length; i++) {
+            this.valuesStart.push({});
+            this.valuesEnd.push({});
+            this.valuesDelta.push({});
+        }
     },
     
     chain: function(chainObj) {
@@ -78,15 +105,21 @@ ig.Tween = ig.Class.extend({
         this.paused = false;
         this.loopNum = this.loopCount;
         this._elapsed = 0;
-        if ( this._object.tweens.indexOf(this) == -1 ) this._object.tweens.push(this);
         this.started = true;
         this.timer = new ig.Timer();
-        for ( var property in this._props ) {
-            this.initEnd(property, this._props, this.valuesEnd);
-        }
-        for ( var property in this.valuesEnd ) {
-            this.initStart(property, this.valuesEnd, this._object, this.valuesStart);
-            this.initDelta(property, this.valuesDelta, this._object, this.valuesEnd);
+        
+        for (var i = 0; i < this._objects.length; i++) {
+            
+            // Ensure tween in all object tween arrays
+            if ( this._objects[i].tweens.indexOf(this) == -1 ) this._objects[i].tweens.push(this);
+            
+            for ( var property in this._props[i] ) {
+                this.initEnd(property, this._props[i], this.valuesEnd[i]);
+            }
+            for ( var property in this.valuesEnd[i] ) {
+                this.initStart(property, this.valuesEnd[i], this._objects[i], this.valuesStart[i]);
+                this.initDelta(property, this.valuesDelta[i], this._objects[i], this.valuesEnd[i]);
+            }
         }
     },
     
@@ -128,35 +161,37 @@ ig.Tween = ig.Class.extend({
         elapsed = elapsed > 1 ? 1 : elapsed;
         var value = this.easing(elapsed);
 
-        for ( var property in this.valuesDelta ) {
-            this.propUpdate(property, this._object, this.valuesStart, this.valuesDelta, value);
-        }
+        for (var i = 0; i < this._objects.length; i++) {
+            for ( var property in this.valuesDelta[i] ) {
+                this.propUpdate(property, this._objects[i], this.valuesStart[i], this.valuesDelta[i], value);
+            }
 
-        if ( elapsed >= 1 ) {
-            if ( this.loopNum == 0 || !this.loop ) {
-                this.complete = true;
-                if ( this.onComplete ) this.onComplete();
-                if ( this._chained ) this._chained.start();
-                return false;
-            } else if ( this.loop == ig.Tween.Loop.Revert ) {
-                for ( var property in this.valuesStart ) {
-                    this.propSet(property, this.valuesStart, this._object); 
+            if ( elapsed >= 1 ) {
+                if ( this.loopNum == 0 || !this.loop ) {
+                    this.complete = true;
+                    if ( this.onComplete ) this.onComplete();
+                    if ( this._chained ) this._chained.start();
+                    return false;
+                } else if ( this.loop == ig.Tween.Loop.Revert ) {
+                    for ( var property in this.valuesStart[i] ) {
+                        this.propSet(property, this.valuesStart[i], this._objects[i]); 
+                    }
+                    this._elapsed = 0;
+                    this.timer.reset();
+                    if ( this.loopNum != -1 ) this.loopNum--;
+                } else if ( this.loop == ig.Tween.Loop.Reverse ) {
+                    var _start = {}, _end = {}, _delta = {};
+                    ig.merge(_start, this.valuesEnd[i]);
+                    ig.merge(_end, this.valuesStart[i]);
+                    ig.merge(this.valuesStart[i], _start);
+                    ig.merge(this.valuesEnd[i], _end);
+                    for ( var property in this.valuesEnd[i] ) {
+                        this.initDelta(property, this.valuesDelta[i], this._objects[i], this.valuesEnd[i]);
+                    }
+                    this._elapsed = 0;
+                    this.timer.reset();
+                    if ( this.loopNum != -1 ) this.loopNum--;
                 }
-                this._elapsed = 0;
-                this.timer.reset();
-                if ( this.loopNum != -1 ) this.loopNum--;
-            } else if ( this.loop == ig.Tween.Loop.Reverse ) {
-                var _start = {}, _end = {}, _delta = {};
-                ig.merge(_start, this.valuesEnd);
-                ig.merge(_end, this.valuesStart);
-                ig.merge(this.valuesStart, _start);
-                ig.merge(this.valuesEnd, _end);
-                for ( var property in this.valuesEnd ) {
-                    this.initDelta(property, this.valuesDelta, this._object, this.valuesEnd);
-                }
-                this._elapsed = 0;
-                this.timer.reset();
-                if ( this.loopNum != -1 ) this.loopNum--;
             }
         }
     },
