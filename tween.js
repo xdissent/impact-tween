@@ -148,6 +148,17 @@ ig.Tween = ig.Class.extend({
         }
     },
     
+    propSet: function(prop, from, to) {
+        if ( typeof(from[prop]) !== "object" ) {
+            to[prop] = from[prop];
+        } else {
+            for ( subprop in from[prop] ) {
+                if ( !to[prop] ) to[prop] = {};
+                this.propSet( subprop, from[prop], to[prop] );
+            }
+        }
+    },
+    
     update: function() {
         if ( !this.started ) return false;
         if ( this.delay ) {
@@ -215,6 +226,16 @@ ig.Tween = ig.Class.extend({
             this.update();
         }
         this.complete = true;
+    },
+    
+    rewind: function() {
+        var loop = this.loop;
+        this.complete = false;
+        this.paused = false;
+        this.loopNum = -1;
+        this.loop = ig.Tween.Loop.Revert;
+        this.update();
+        this.loop = loop;
     }
 });
 

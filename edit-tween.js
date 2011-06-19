@@ -173,7 +173,7 @@ wm.EditTween = ig.Class.extend({
         if (this.drawLoop) {
             this.tween.onComplete();
         }
-//        this.tween.rewind();
+        this.tween.rewind();
         this.tween = null;
         this.div.children('.play').removeClass('inactive');
         this.div.children('.rewind').addClass('inactive');
