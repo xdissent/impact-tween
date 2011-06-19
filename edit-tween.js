@@ -14,6 +14,7 @@ wm.EditTween = ig.Class.extend({
     active: true,
     easing: 'ig.Tween.Easing.Linear.EaseNone',
     delay: 0,
+    chain: '',
     entities: [],
     entityMenu: null,
     activeTweenEntity: null,
@@ -292,7 +293,8 @@ wm.EditTween = ig.Class.extend({
 			easing: this.easing,
             entities: this.entities,
             props: this.props,
-            delay: this.delay
+            delay: this.delay,
+            chain: this.chain
 		};
 	}
 

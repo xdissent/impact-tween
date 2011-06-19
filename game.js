@@ -17,6 +17,9 @@ ig.Game.inject({
         
         this.namedTweens = {};
         if (data.tweens) {
+            
+            var chains = [];
+            
             for (var i = 0; i < data.tweens.length; i++) {
 
                 var objs = [],
@@ -46,8 +49,19 @@ ig.Game.inject({
                 }
                 
                 var tween = new ig.Tween(objs, props, dur, {easing: easing, delay: delay});
+                
+                if (data.tweens[i].chain) {
+                    chains.push([tween, data.tweens[i].chain]);
+                }
+                
                 if (name) {
                     this.namedTweens[data.tweens[i].name] = tween;
+                }
+            }
+            
+            for (var i = 0; i < chains.length; i++) {
+                if (typeof this.namedTweens[chains[i][1]] !== 'undefined') {
+                    chains[i][0].chain(this.namedTweens[chains[i][1]]);
                 }
             }
         }

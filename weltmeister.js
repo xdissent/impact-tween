@@ -45,6 +45,7 @@ wm.Weltmeister.inject({
 				<dt>Name:</dt><dd><input type="text" class="text" id="tweenName"/></dd> \
 				<dt>Duration:</dt><dd><input type="text" class="number" id="tweenDuration"/></dd> \
 				<dt>Delay:</dt><dd><input type="text" class="number" id="tweenDelay"/></dd> \
+				<dt>Chain:</dt><dd><input type="text" class="text" id="tweenChain"/></dd> \
 				<dt>Easing:</dt> \
 				<dd> \
 				    <select id="tweenEasing"> \
@@ -161,6 +162,7 @@ wm.Weltmeister.inject({
                 newTween.props = td.props;
                 newTween.easing = td.easing;
                 newTween.delay = td.delay;
+                newTween.chain = (typeof td.chain === 'undefined') ? '' : td.chain;
                 this._tweens.push(newTween);
                 activated = newTween.name;
     		}
@@ -261,6 +263,7 @@ wm.Weltmeister.inject({
     		$('#tweenDuration').val( this.activeTween.dur );
     		$('#tweenEasing').val(this.activeTween.easing);
     		$('#tweenDelay').val(this.activeTween.delay);
+    		$('#tweenChain').val(this.activeTween.chain);
         }
 	},
 	
@@ -274,9 +277,11 @@ wm.Weltmeister.inject({
 		var newDur = $('#tweenDuration').val();
 		var newEasing = $('#tweenEasing').val();
 		var newDelay = $('#tweenDelay').val();
+		var newChain = $('#tweenChain').val();
 		this.activeTween.dur = newDur;
 		this.activeTween.easing = newEasing;
 		this.activeTween.delay = newDelay;
+		this.activeTween.chain = newChain;
 		this.activeTween.setName(newName);
 		this.updateTweenSettings();
 		this.setModified();
