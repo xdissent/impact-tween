@@ -147,6 +147,11 @@ Create a tween on multiple objects and properties:
     
 ### Weltmeister Integration ###
 
+Weltmeister support requires the `impact-leveldata` plugin available on Github:
+https://github.com/xdissent/impact-leveldata 
+
+Install the `impact-leveldata` plugin into the `lib/plugins/impact-leveldata` folder.
+
 Load the Weltmeister extension at the bottom of `lib/weltmeister/weltmeister.js`:
 
     // Load impact-tween plugin
