@@ -3,7 +3,7 @@ ig.module(
 )
 .requires(
     'weltmeister.weltmeister',
-    'plugins.leveldata.weltmeister',
+    'plugins.impact-leveldata.weltmeister',
     'plugins.impact-tween.edit-tween'
 )
 .defines(function() {
