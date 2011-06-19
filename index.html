@@ -1,31 +1,58 @@
 <!DOCTYPE html>
 <html>
 <head>
-	<title>Impact Game</title>
+	<title>Impact Tween Plugin Example</title>
 	<style type="text/css">
-		html,body {
+		html, body {
 			background-color: #000;
-			color: #fff;
+			color: #e4e4e4;
 			font-family: helvetica, arial, sans-serif;
 			margin: 0;
 			padding: 0;
 			font-size: 12pt;
 		}
 		
+		a {
+		    color: #653030;
+		}
+		
+		h1 {
+		    text-align: center;		    
+		}
+		
+		h1, p {
+		    margin: 40px auto;
+		    width: 640px;
+		}
+		
 		#canvas {
-			position: absolute;
-			left: 0;
-			right: 0;
-			top: 0;
-			bottom: 0;
-			margin: auto;
+		    display: block;
+			margin: 20px auto;
+			width: 640px;
 			border: 1px solid #555;
 		}
+
 	</style>
 
 	<script type="text/javascript" src="game.min.js"></script>
 </head>
 <body>
+    <h1>Impact Tween Plugin Example</h1>
 	<canvas id="canvas"></canvas>
+	<p>
+	    This example uses the <a href="https://github.com/xdissent/impact-tween" title="Impact Tween Plugin">Impact Tween Plugin</a>.
+	    A tween is created in <a href="http://impactjs.com/documentation/weltmeister" title="Weltmeister">Weltmeister</a> that eases
+	    the game's screen down the Y axis as the character falls (due to gravity). A tween trigger area is set up just above the floor
+	    so that as the character lands, another tween is triggered to bounce the other characters into the air. The initial screen tween
+	    is started within the game code, but everything is built exclusively in Weltmeister.
+	</p>
+	
+	<p>
+        To build this example, unpack the <code><a href="https://github.com/xdissent/impact-tween/tree/gh-pages/lib/game">lib/game</a></code>
+        and <code><a href="https://github.com/xdissent/impact-tween/tree/gh-pages/media">media</a></code> folders into the ImpactJS source.
+        Then install the <a href="https://github.com/xdissent/impact-leveldata">Impact Leveldata Plugin</a> and 
+        <a href="https://github.com/xdissent/impact-tween" title="Impact Tween Plugin">Impact Tween Plugin</a> as described in the 
+        <a href="https://github.com/xdissent/impact-tween/blob/master/README.md" title="Impact Tween Plugin README">README</a>.
+	</p>
 </body>
 </html>
