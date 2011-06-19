@@ -17,7 +17,6 @@ ig.Game.inject({
         
         this.namedTweens = {};
         if (data.tweens) {
-            console.log('tween data');
             for (var i = 0; i < data.tweens.length; i++) {
 
                 var objs = [],

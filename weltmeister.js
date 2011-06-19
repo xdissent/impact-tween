@@ -414,12 +414,6 @@ wm.Weltmeister.inject({
 		
 		this.draw();
 		this.mouseLast = {x: ig.input.mouse.x, y: ig.input.mouse.y};
-	},
-	
-	debug: function(msg) {
-        if (this.isDebug) {
-            console.log(msg);
-        }
 	}
 
 });
