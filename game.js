@@ -32,15 +32,14 @@ ig.Game.inject({
                         objs.push(ent);
                         var p = {},
                             op = p;
-                        for (var y = 0; y < data.tweens[i].props.length; y++) {
-                            for (var x in data.tweens[i].props[y]) {
-                                var pieces = x.split('.');
-                                for (var k = 0; k < pieces.length - 1; k++) {
-                                    p[pieces[k]] = {};
-                                    p = p[pieces[k]];
-                                }
-                                p[pieces[pieces.length - 1]] = data.tweens[i].props[y][x];
+
+                        for (var x in data.tweens[i].props[j]) {
+                            var pieces = x.split('.');
+                            for (var k = 0; k < pieces.length - 1; k++) {
+                                p[pieces[k]] = {};
+                                p = p[pieces[k]];
                             }
+                            p[pieces[pieces.length - 1]] = data.tweens[i].props[j][x];
                         }
                         props.push(op);
                     }

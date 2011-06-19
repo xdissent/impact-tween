@@ -89,7 +89,10 @@ ig.Tween = ig.Class.extend({
         }
     },
     
-    initStart: function(prop, end, from, to) {
+    initStart: function(prop, end, from, to) {;
+        if ( typeof from.tweenInitStart === "function" ) {
+            return from.tweenInitStart(prop, end, to);
+        }
         if ( typeof(from[prop]) !== "object" ) {
             if ( typeof(end[prop]) !== "undefined" ) to[prop] = from[prop];
         } else {
@@ -124,6 +127,9 @@ ig.Tween = ig.Class.extend({
     },
     
     initDelta: function(prop, delta, start, end) {
+        if ( typeof start.tweenInitDelta === "function" ) {
+            return start.tweenInitDelta(prop, delta, end);
+        }
         if ( typeof(end[prop]) !== "object" ) {
             delta[prop] = end[prop] - start[prop];
         } else {
@@ -135,6 +141,9 @@ ig.Tween = ig.Class.extend({
     },
     
     propUpdate: function(prop, obj, start, delta, value) {
+        if ( typeof obj.tweenPropUpdate === "function" ) {
+            return obj.tweenPropUpdate(prop, start, delta, value);
+        }
         if ( typeof(start[prop]) !== "object" ) {
             if ( typeof start[prop] != "undefined" ) {
                 obj[prop] = start[prop] + delta[prop] * value;
@@ -149,6 +158,9 @@ ig.Tween = ig.Class.extend({
     },
     
     propSet: function(prop, from, to) {
+        if ( typeof to.tweenPropSet === "function" ) {
+            return to.tweenPropSet(prop, from);
+        }
         if ( typeof(from[prop]) !== "object" ) {
             to[prop] = from[prop];
         } else {
