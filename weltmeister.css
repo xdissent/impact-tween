@@ -1,0 +1,131 @@
+/* --- Tweens ------------------------------------------------------------------ */
+
+#tweenContainer, #tweenEntityContainer {
+	background-color: #111;
+}
+
+#tweens, #tweenEntities {
+	min-height: 28px;
+	max-height: 140px;
+	overflow: auto;
+}
+
+#tweenButtons, #tweenEntityButtons {
+	background-color: #222;
+}
+
+#tweenButtons div.button, #tweenEntityButtons div.button {
+	float: left;
+	cursor: pointer;
+	padding: 2px 0;
+	width: 26px;
+	text-align: center;
+	font-weight: bold;
+	border-left: 1px solid #333;
+	border-right: 1px solid #111;
+}
+#tweenButtons div.button:hover, #tweenEntityButtons div.button:hover { background-color: #444; }
+#buttonRemoveTween, #buttonRemoveTweenEntity { color: #f26522; }
+#buttonAddTween, #buttonAddTweenEntity { color: #ceff36; }
+
+.tween, .tweenEntity {
+	background-color: #111;
+	border-bottom: 1px solid #333;
+	padding: 6px 4px;
+	cursor: pointer;
+}
+
+.tween .play, .tween .rewind {
+    float: right;
+}
+
+.tween .play.inactive, .tween .rewind.inactive {
+    display: none;
+}
+
+.tweenActive, .tweenEntityActive { background-color: #333; }
+
+#tweenSettings {
+	background-color: #111;
+	display: none;
+}
+
+#tweenEntityMenu {
+    background-color: rgba(0,0,0,0.9);
+	display: none;
+	position: absolute;
+	min-width: 100px;
+	max-height:300px;
+	overflow-y: scroll;
+	-webkit-box-shadow:0px 0px 10px rgba(0,0,0,1);
+	z-index: 50;
+}
+
+#tweenEntityMenu div {
+	padding: 2px;
+	color: #fff;
+	cursor: pointer;
+}
+
+#tweenEntityMenu div:hover {
+	background-color: #444;
+}
+
+#tweenEntityProperties{
+	margin-top: 10px;
+	border-top: 1px solid #333;
+	min-height: 28px;
+	max-height: 140px;
+	overflow: auto;
+}
+
+div.tweenEntityProperty {
+	color: #aaa;
+	padding: 2px 0;
+	border-bottom: 1px solid #333;
+	cursor: pointer;
+}
+
+div.tweenEntityProperty:hover {
+	background-color: #333;
+}
+
+div.tweenEntityProperty .key {
+	width: 55%;
+	display: block;
+	float: left;
+	margin: 0 0px 0 0;
+	padding: 0;
+	text-align: right;
+	color: #fff;
+	overflow: hidden;
+}
+
+div.tweenEntityProperty .value {
+	padding: 0 0 0 2px;
+	color: #fff;
+}
+
+
+dl#tweenEntityPropertyInput {
+	padding: 8px 0;
+}
+
+dl#tweenEntityPropertyInput dt {
+	width: 40px;
+	display: block;
+	float: left;
+	margin: 0 4px 0 0;
+	padding: 4px 0 0 0;
+	text-align: right;
+}
+
+dl#tweenEntityPropertyInput dd {
+	display: block;
+	margin: 0;
+	padding: 2px 0;
+}
+
+#tweenEntityKey, #tweenEntityValue {
+	width: 95px;
+}

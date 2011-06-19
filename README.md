@@ -143,3 +143,24 @@ Create a tween on multiple objects and properties:
         myEntity2 = this.spawnEntity(MyEntity, 100, 20, {}),
         tween = new ig.Tween([myEntity1, myEntity2], [{pos: {x: 100}}, {pos: {x: 0}}], 2.5);
     tween.start();
+    
+    
+### Weltmeister Integration ###
+
+Load the Weltmeister extension at the bottom of `lib/weltmeister/weltmeister.js`:
+
+    // Load impact-tween plugin
+    ig.module('weltmeister.tweening').requires('plugins.impact-tween.weltmeister').defines(function() {});
+
+    var loader = new wm.Loader( wm.Weltmeister, ig.resources );
+    loader.load();
+    
+Add a tween in Weltmeister using the `+` button under the `Tweens` heading. Adjust the settings and name
+to your liking, then press `Apply Changes`. Entities can be added to the tween by pressing the spacebar 
+or using the `+` button under the `Tween Entities` heading. Add the properties to be tweened and their 
+values to the tweened entity using the text inputs.
+
+Add `plugins.impact-tween.game` to your game dependencies and start a tween created in Weltmeister:
+
+    ig.game.namedTweens.myTween.start();
+    
