@@ -169,3 +169,17 @@ Add `plugins.impact-tween.game` to your game dependencies and start a tween crea
 
     ig.game.namedTweens.myTween.start();
     
+
+### Entities ###
+
+Two additional entity classes are available, `plugins.impact-tween.object-proxy` 
+and `plugins.impact-tween.tween-trigger`. An `EntityObjectProxy` instance can be 
+used to tween a property on any global javascript object. Set the `target` property
+to be a string containing the name of the object to tween, for example `ig.game.screen`
+or `ig.music.volume`. Then the object proxy instance can be tweened as if it were 
+any other entity.
+
+The `EntityTweenTrigger` entity is used to start a tween when a `ig.Entity.TYPE.A`
+entity collides with it. It is based on the `EntityTrigger` example from the 
+ImpactJS website. Add the names of the tweens to be triggered as properties on the
+tween trigger instance in the form of `target.0`, `target.1`, `target.2` etc.
