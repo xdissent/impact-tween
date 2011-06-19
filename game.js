@@ -23,6 +23,7 @@ ig.Game.inject({
                     props = [],
                     dur = data.tweens[i].dur,
                     easing = eval(data.tweens[i].easing),
+                    delay = data.tweens[i].delay ? data.tweens[i].delay : 0,
                     name = data.tweens[i].name;
                     
                 for (var j = 0; j < data.tweens[i].entities.length; j++) {
@@ -45,7 +46,7 @@ ig.Game.inject({
                     }
                 }
                 
-                var tween = new ig.Tween(objs, props, dur, {easing: easing});
+                var tween = new ig.Tween(objs, props, dur, {easing: easing, delay: delay});
                 if (name) {
                     this.namedTweens[data.tweens[i].name] = tween;
                 }

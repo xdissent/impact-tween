@@ -44,6 +44,7 @@ wm.Weltmeister.inject({
 			<dl> \
 				<dt>Name:</dt><dd><input type="text" class="text" id="tweenName"/></dd> \
 				<dt>Duration:</dt><dd><input type="text" class="number" id="tweenDuration"/></dd> \
+				<dt>Delay:</dt><dd><input type="text" class="number" id="tweenDelay"/></dd> \
 				<dt>Easing:</dt> \
 				<dd> \
 				    <select id="tweenEasing"> \
@@ -80,7 +81,6 @@ wm.Weltmeister.inject({
                         <option value="ig.Tween.Easing.Back.EaseInOut">In Out Back</option>                 \
 				    </select> \
 				</dd> \
-				<dt>Target:</dt><dd><input type="text" class="text" id="tweenTarget"/></dd> \
 				<dd><input type="button" id="buttonSaveTweenSettings" value="Apply Changes" class="button"/></dd> \
 			</dl> \
 		</div>').insertAfter('#tweenContainer');
@@ -160,7 +160,7 @@ wm.Weltmeister.inject({
                 newTween.entities = td.entities;
                 newTween.props = td.props;
                 newTween.easing = td.easing;
-                newTween.target = td.target;
+                newTween.delay = td.delay;
                 this._tweens.push(newTween);
                 activated = newTween.name;
     		}
@@ -260,14 +260,7 @@ wm.Weltmeister.inject({
     		$('#tweenName').val( this.activeTween.name );
     		$('#tweenDuration').val( this.activeTween.dur );
     		$('#tweenEasing').val(this.activeTween.easing);
-    		if (typeof this.activeTween.target == 'object' 
-    		    && this.activeTween.target != null
-    		    && this.activeTween.target['0']
-    		) {
-    		    $('#tweenTarget').val(this.activeTween.target['0']);
-    		} else {
-    		    $('#tweenTarget').val("");
-    		}
+    		$('#tweenDelay').val(this.activeTween.delay);
         }
 	},
 	
@@ -280,10 +273,10 @@ wm.Weltmeister.inject({
 		var newName = $('#tweenName').val();
 		var newDur = $('#tweenDuration').val();
 		var newEasing = $('#tweenEasing').val();
-		var newTarget = $('#tweenTarget').val() ? {'0': $('#tweenTarget').val()} : null;
+		var newDelay = $('#tweenDelay').val();
 		this.activeTween.dur = newDur;
 		this.activeTween.easing = newEasing;
-		this.activeTween.target = newTarget;
+		this.activeTween.delay = newDelay;
 		this.activeTween.setName(newName);
 		this.updateTweenSettings();
 		this.setModified();

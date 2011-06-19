@@ -13,7 +13,7 @@ wm.EditTween = ig.Class.extend({
     dur: 1,
     active: true,
     easing: 'ig.Tween.Easing.Linear.EaseNone',
-    target: null,
+    delay: 0,
     entities: [],
     entityMenu: null,
     activeTweenEntity: null,
@@ -144,7 +144,8 @@ wm.EditTween = ig.Class.extend({
                 clearInterval(self.drawLoop);
                 self.drawLoop = null;
             },
-            easing: eval(this.easing)
+            easing: eval(this.easing),
+            delay: this.delay
         });
         
         this.tween.start();
@@ -291,7 +292,7 @@ wm.EditTween = ig.Class.extend({
 			easing: this.easing,
             entities: this.entities,
             props: this.props,
-            target: this.target
+            delay: this.delay
 		};
 	}
 
